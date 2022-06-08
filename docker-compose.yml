@@ -1,0 +1,18 @@
+version: '1'
+services:
+  DigitalNotes:
+    image: webservice
+    restart: always
+    container_name: DigitalNotes
+    ports:
+      - 5000:5000
+    volumes:
+      - ./database/data:/data/db
+    depends_on:
+      - database
+  database:
+    image: mongo
+    restart: always
+    container_name: DititalNotesDB
+    ports:
+      - 27017:27017
