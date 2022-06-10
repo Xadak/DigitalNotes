@@ -8,9 +8,12 @@
         <li><span>{{current_user["username"]}}{% if current_user["admin"] is true %}(Administrator){% endif %}</span>
         </li>
         <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+        {% if current_user["admin"] is true %}
+        <li><a href="{{url_for('register', admin=True)}}">Register new administrator</a></li>
+        {% endif %}
         {%else %}
         <li><a href="{{ url_for('login') }}">Log in</a></li>
-        <li><a href="{{ url_for('register') }}">Register</a></li>
+        <li><a href="{{ url_for('register', admin=False) }}">Register</a></li>
         {% endif %}
 
     </ul>
