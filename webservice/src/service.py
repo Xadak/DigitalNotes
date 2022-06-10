@@ -18,7 +18,7 @@ def login():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
-        current_user = db.find_user_by_username(username, password)
+        current_user = db.find_user(username, password)
         if current_user == None:
             return render_template("login.html", login_failed=True)
         return redirect(url_for("homepage", username=current_user['username']))

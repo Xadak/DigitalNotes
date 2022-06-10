@@ -11,5 +11,5 @@ class DBHandle:
         self.users = db["users"]
         self.notes = db["notes"]
 
-    def find_user_by_username(self, username, password):
-        return self.users.find_one({"username": username, "password": password})
+    def find_user(self, username_or_email, password):
+        return self.users.find_one({"$or": [{"username": username_or_email}, {"email": username_or_email}], "password": password})
