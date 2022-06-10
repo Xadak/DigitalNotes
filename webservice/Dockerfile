@@ -5,4 +5,5 @@ RUN pip3 install flask pymongo
 EXPOSE 5000
 ADD data /data
 ADD src /src
+ADD templates /src/templates
 ENTRYPOINT [ "python3", "-u", "/src/service.py" ]
