@@ -62,6 +62,32 @@ def logout():
     return redirect(url_for("homepage"))
 
 
+@app.route('/delete_self/')
+def delete_self():
+    global current_user
+    if current_user is not None:
+        db.delete_user(current_user["username"])
+        current_user = None
+    return redirect(url_for("homepage"))
+
+
+@app.route('/delete_other/', methods=['POST', 'GET'])
+def delete_other():
+    global current_user
+    if current_user is None or not current_user["admin"]:
+        return redirect(url_for("homepage"))
+
+    if request.method == "POST":
+        username = request.form.get("username")
+
+        if username != current_user["username"]:
+            if db.delete_user(username) is None:
+                return render_template("delete_user.html", not_found=True, username=current_user["username"])
+            return redirect(url_for("homepage"))
+        return render_template("delete_user.html", selected_self=True, username=current_user["username"])
+    return render_template("delete_user.html", username=current_user["username"])
+
+
 @app.route('/index/<username>/')
 @app.route('/index/')
 def homepage(username=None):

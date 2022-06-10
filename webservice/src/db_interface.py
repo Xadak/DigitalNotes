@@ -13,3 +13,6 @@ class DBHandle:
 
     def find_user(self, username_or_email, password):
         return self.users.find_one({"$or": [{"username": username_or_email}, {"email": username_or_email}], "password": password})
+
+    def delete_user(self, username_or_email):
+        return self.users.find_one_and_delete({"username": username_or_email})

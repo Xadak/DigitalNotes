@@ -10,6 +10,9 @@
         <li><a href="{{ url_for('logout') }}">Log Out</a></li>
         {% if current_user["admin"] is true %}
         <li><a href="{{url_for('register', admin=True)}}">Register new administrator</a></li>
+        <li><a href="{{url_for('delete_other')}}">Delete a user</a></li>
+        {% else %}
+        <li><a href="{{url_for('delete_self')}}">Delete account</a></li>
         {% endif %}
         {%else %}
         <li><a href="{{ url_for('login') }}">Log in</a></li>
