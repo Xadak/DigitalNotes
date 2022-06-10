@@ -1,7 +1,9 @@
 [
     {
-        "admin": "true",
+        "admin": true,
         "username": "Xadak",
+        "first_name": "Nick",
+        "last_name": "Exadaktylos",
         "email": "nick6finger@gmail.com",
         "password": "12345"
     }

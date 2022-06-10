@@ -5,10 +5,12 @@
     <h1>Digital Notes</h1>
     <ul>
         {% if current_user %}
-        <li><span>{{current_user["username"]}}</span></li>
+        <li><span>{{current_user["username"]}}{% if current_user["admin"] is true %}(Administrator){% endif %}</span>
+        </li>
         <li><a href="{{ url_for('logout') }}">Log Out</a></li>
         {%else %}
         <li><a href="{{ url_for('login') }}">Log in</a></li>
+        <li><a href="{{ url_for('register') }}">Register</a></li>
         {% endif %}
 
     </ul>

@@ -26,6 +26,25 @@ def login():
         return render_template("login.html", login_failed=None)
 
 
+@app.route('/auth/register/', methods=['POST', "GET"])
+def register():
+    global current_user
+    if request.method == "POST":
+        username = request.form.get("username")
+        email = request.form.get("email")
+        first_name = request.form.get("first_name")
+        last_name = request.form.get("last_name")
+        password = request.form.get("password")
+        if db.find_user(username, password) is not None or db.find_user(email, password) is not None:
+            return render_template("register.html", user_exists=True)
+        current_user = {"admin": False, "username": username, "email": email,
+                        "first_name": first_name, "last_name": last_name, "password": password}
+        db.users.insert_one(current_user)
+        return redirect(url_for("homepage", username=current_user['username']))
+    else:
+        return render_template("register.html", login_failed=None)
+
+
 @app.route('/auth/logout/')
 def logout():
     global current_user
