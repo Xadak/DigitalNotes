@@ -98,7 +98,7 @@ def homepage(username=None):
         return render_template("index.html")
     if current_user is None or username != current_user["username"]:
         return redirect(url_for("login"))
-    return render_template("index.html", current_user=current_user)
+    return render_template("index.html", current_user=current_user, notes=db.notes_of(current_user["_id"]))
 
 
 @app.route('/create_note', methods=["POST", "GET"])
@@ -110,8 +110,8 @@ def create_note():
         user_id = current_user["_id"]
         title = request.form.get("title")
         creation_date = datetime.now()
-        content = request.form.get("content")
-        tags = str.split(request.form.get("tags"))
+        content = request.form.get("content").lstrip(' ')
+        tags = str.split(request.form.get("tags"), ",")
 
         db.add_note(user_id, title, creation_date, content, tags)
         return redirect(url_for('homepage'))

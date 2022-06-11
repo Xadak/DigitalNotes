@@ -6,4 +6,5 @@ EXPOSE 5000
 ADD data /data
 ADD src /src
 ADD templates /src/templates
+ADD static /src/static
 ENTRYPOINT [ "python3", "-u", "/src/service.py" ]

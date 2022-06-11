@@ -6,19 +6,43 @@
     Welcome to Digital Notes!
 </h2>
 {% if current_user %}
-<button type="button"><a href="{{ url_for('create_note') }}">Create a note</a></button>
-{% endif %}
+<a href="{{ url_for('create_note') }}"><button type="button">Create a note</button></a>
 {% if create_note %}
 <section>
     <form method="post">
         <label for="title">Title</label>
         <input name="title" id="title" required>
-        <label for="content">Note</label>
-        <textarea name="content" id="content" placeholder="New note..." rows="50" cols="80"></textarea>
         <label for="tags">Tags (comma separated)</label>
         <input name="tags" id="tags">
+        <br />
+        <textarea name="content" id="content" placeholder="New note..." rows="50" cols="80"></textarea>
+        <br />
         <input type="submit" value="Create">
     </form>
 </section>
+{% else %}
+<h3>My Notes</h3>
+<ul>
+    {% for note in notes %}
+    <li>
+        <details>
+            <summary>
+                <label>{{note["title"]}} </label> <time
+                    datetime="{{note['date'].strftime('%Y-%m-%d %H:%M:%S')}}">{{note['date'].strftime('%H:%M:%S
+                    %d-%m-%Y')}}</time>
+            </summary>
+            <textarea rows="30" cols="50" readonly>{{note["content"]}}</textarea>
+        </details>
+        <ul>
+            {% for tag in note["tags"] %}
+            <li>
+                {{tag}}
+            </li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
 {% endif %}
 {% endblock %}

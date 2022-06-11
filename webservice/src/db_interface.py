@@ -20,3 +20,6 @@ class DBHandle:
     def add_note(self, user_id, title, date, content, tags):
         self.notes.insert_one(
             {"user_id": user_id, "title": title, "date": date, "content": content, "tags": tags})
+
+    def notes_of(self, user_id):
+        return self.notes.find({"user_id": user_id})
