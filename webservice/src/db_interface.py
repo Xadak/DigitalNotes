@@ -16,3 +16,7 @@ class DBHandle:
 
     def delete_user(self, username_or_email):
         return self.users.find_one_and_delete({"username": username_or_email})
+
+    def add_note(self, user_id, title, date, content, tags):
+        self.notes.insert_one(
+            {"user_id": user_id, "title": title, "date": date, "content": content, "tags": tags})

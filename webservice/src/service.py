@@ -1,4 +1,5 @@
 from logging import LoggerAdapter
+from datetime import datetime
 import db_interface
 import initialize_data
 from flask import Flask, redirect, render_template, request, url_for, g
@@ -98,6 +99,24 @@ def homepage(username=None):
     if current_user is None or username != current_user["username"]:
         return redirect(url_for("login"))
     return render_template("index.html", current_user=current_user)
+
+
+@app.route('/create_note', methods=["POST", "GET"])
+def create_note():
+    if current_user is None:
+        return redirect(url_for("login"))
+
+    if request.method == "POST":
+        user_id = current_user["_id"]
+        title = request.form.get("title")
+        creation_date = datetime.now()
+        content = request.form.get("content")
+        tags = str.split(request.form.get("tags"))
+
+        db.add_note(user_id, title, creation_date, content, tags)
+        return redirect(url_for('homepage'))
+
+    return render_template("index.html", current_user=current_user, create_note=True)
 
 
 if __name__ == '__main__':

@@ -5,4 +5,20 @@
 <h2>
     Welcome to Digital Notes!
 </h2>
+{% if current_user %}
+<button type="button"><a href="{{ url_for('create_note') }}">Create a note</a></button>
+{% endif %}
+{% if create_note %}
+<section>
+    <form method="post">
+        <label for="title">Title</label>
+        <input name="title" id="title" required>
+        <label for="content">Note</label>
+        <textarea name="content" id="content" placeholder="New note..." rows="50" cols="80"></textarea>
+        <label for="tags">Tags (comma separated)</label>
+        <input name="tags" id="tags">
+        <input type="submit" value="Create">
+    </form>
+</section>
+{% endif %}
 {% endblock %}
