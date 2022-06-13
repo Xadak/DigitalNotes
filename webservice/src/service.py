@@ -119,5 +119,13 @@ def create_note():
     return render_template("index.html", current_user=current_user, create_note=True)
 
 
+@app.route('/delete_note/<username>/<title>/')
+def delete_note(username, title):
+    if current_user is None or current_user['username'] != username:
+        return redirect(url_for("homepage"))
+    db.delete_note(username, title)
+    return redirect(url_for("homepage"))
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

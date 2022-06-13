@@ -23,3 +23,7 @@ class DBHandle:
 
     def notes_of(self, user_id):
         return self.notes.find({"user_id": user_id})
+
+    def delete_note(self, username, title):
+        user_id = self.users.find_one({"username": username})["_id"]
+        return self.notes.find_one_and_delete({"user_id": user_id, "title": title})
