@@ -22,39 +22,65 @@
 </section>
 {% else %}
 <h3>My Notes</h3>
-<a href="{{url_for('homepage', username=current_user['username'], descending= True if (not descending ) else None)}}">
-    <button type="button">
-        {%if descending %}
-        Desc
-        {%else %}
-        Asc
-        {%endif%}
-    </button>
-</a>
-<ul>
-    {% for note in notes %}
-    <li>
-        <details>
-            <summary>
-                <label>{{note["title"]}} </label> <time
-                    datetime="{{note['date'].strftime('%Y-%m-%d %H:%M:%S')}}">{{note['date'].strftime('%H:%M:%S
+
+<table>
+    <thead>
+        <td>
+            Title
+        </td>
+        <td>
+            Date created:
+            <a
+                href="{{url_for('homepage', username=current_user['username'], descending= True if (not descending ) else None)}}">
+                <button type="button">
+                    {%if descending %}
+                    Descending
+                    {%else %}
+                    Ascending
+                    {%endif%}
+                </button>
+            </a>
+        </td>
+        <td>
+            Tags
+        </td>
+        <td>
+
+        </td>
+    </thead>
+    <tbody>
+        {% for note in notes %}
+        <tr>
+            <td>
+                <label>{{note["title"]}} </label>
+            </td>
+            <td>
+                <time datetime="{{note['date'].strftime('%Y-%m-%d %H:%M:%S')}}">{{note['date'].strftime('%H:%M:%S
                     %d-%m-%Y')}}</time>
-            </summary>
-            <textarea rows="30" cols="50" readonly>{{note["content"]}}</textarea>
-        </details>
-        <ul>
-            {% for tag in note["tags"] %}
-            <li>
-                {{tag}}
-            </li>
-            {% endfor %}
-        </ul>
-        <a href="{{url_for('delete_note', user_id=current_user['_id'], note_id=note['_id'])}}">
-            <button type="button">Delete</button>
-        </a>
-    </li>
-    {% endfor %}
-</ul>
+            </td>
+
+            <td>
+                {{ note["tags"]|join(',') }}
+            </td>
+            <td>
+                <a href="{{url_for('delete_note', user_id=current_user['_id'], note_id=note['_id'])}}">
+                    <button type="button">Delete</button>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <details>
+                    <summary>
+                        Note
+                    </summary>
+                    <textarea rows="30" cols="50" readonly>{{note["content"]}}</textarea>
+                </details>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endif %}
 {% endif %}
 {% endblock %}
