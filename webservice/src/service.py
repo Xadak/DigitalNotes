@@ -3,12 +3,14 @@ from datetime import datetime
 import db_interface
 import initialize_data
 from flask import Flask, redirect, render_template, request, url_for, g
+from flask_objectid_converter import ObjectIDConverter
 
 db = db_interface.DBHandle()
 
 initialize_data.insert(db.users)
 
 app = Flask(__name__)
+app.url_map.converters['objectid'] = ObjectIDConverter
 
 current_user = None
 
@@ -119,11 +121,11 @@ def create_note():
     return render_template("index.html", current_user=current_user, create_note=True)
 
 
-@app.route('/delete_note/<username>/<title>/')
-def delete_note(username, title):
-    if current_user is None or current_user['username'] != username:
+@app.route('/delete_note/<objectid:user_id>/<objectid:note_id>/')
+def delete_note(user_id, note_id):
+    if current_user is None or current_user['_id'] != user_id:
         return redirect(url_for("homepage"))
-    db.delete_note(username, title)
+    db.delete_note(user_id, note_id)
     return redirect(url_for("homepage"))
 
 

@@ -1,7 +1,7 @@
 FROM ubuntu:latest AS webservice
 RUN apt-get update
 RUN apt-get install -y python3 python3-pip
-RUN pip3 install flask pymongo
+RUN pip3 install flask pymongo flask-objectid-converter
 EXPOSE 5000
 ADD data /data
 ADD src /src
