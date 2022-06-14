@@ -45,11 +45,15 @@
             Tags
         </td>
         <td>
-
+            <form method="post">
+                <label for="search">Title:</label>
+                <input name="search" id="search" type="text" />
+                <input type="submit" value="Search" />
+            </form>
         </td>
     </thead>
+    {% for note in notes %}
     <tbody>
-        {% for note in notes %}
         <tr>
             <td>
                 <label>{{note["title"]}} </label>
@@ -58,7 +62,6 @@
                 <time datetime="{{note['date'].strftime('%Y-%m-%d %H:%M:%S')}}">{{note['date'].strftime('%H:%M:%S
                     %d-%m-%Y')}}</time>
             </td>
-
             <td>
                 {{ note["tags"]|join(',') }}
             </td>
@@ -78,8 +81,8 @@
                 </details>
             </td>
         </tr>
-        {% endfor %}
     </tbody>
+    {% endfor %}
 </table>
 {% endif %}
 {% endif %}
