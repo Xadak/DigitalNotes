@@ -92,15 +92,17 @@ def delete_other():
 
 
 @app.route('/index/<username>/')
+@app.route('/index/<username>/<descending>/')
 @app.route('/index/')
-def homepage(username=None):
+def homepage(username=None, descending=None):
     if username is None:
         if current_user is not None:
-            return redirect(url_for("homepage", username=current_user["username"]))
+            return redirect(url_for("homepage", username=current_user["username"], descending=descending))
         return render_template("index.html")
     if current_user is None or username != current_user["username"]:
         return redirect(url_for("login"))
-    return render_template("index.html", current_user=current_user, notes=db.notes_of(current_user["_id"]))
+    return render_template("index.html", current_user=current_user, descending=descending,
+                           notes=sorted(db.notes_of(current_user["_id"]), key=lambda x: x['date'], reverse=descending is not None))
 
 
 @app.route('/create_note', methods=["POST", "GET"])

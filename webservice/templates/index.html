@@ -22,6 +22,15 @@
 </section>
 {% else %}
 <h3>My Notes</h3>
+<a href="{{url_for('homepage', username=current_user['username'], descending= True if (not descending ) else None)}}">
+    <button type="button">
+        {%if descending %}
+        Desc
+        {%else %}
+        Asc
+        {%endif%}
+    </button>
+</a>
 <ul>
     {% for note in notes %}
     <li>
