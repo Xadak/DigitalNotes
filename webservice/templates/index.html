@@ -54,10 +54,16 @@
                 {{ note["tags"]|join(',') }}
             </td>
             <td>
+                <a href="{{url_for('create_note', note_id=note['_id'])}}">
+                    <button type="button">Edit</button>
+                </a>
+            </td>
+            <td>
                 <a href="{{url_for('delete_note', user_id=current_user['_id'], note_id=note['_id'])}}">
                     <button type="button">Delete</button>
                 </a>
             </td>
+
         </tr>
         <tr>
             <td colspan="4">

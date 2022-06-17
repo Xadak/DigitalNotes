@@ -21,6 +21,13 @@ class DBHandle:
         self.notes.insert_one(
             {"user_id": user_id, "title": title, "date": date, "content": content, "tags": tags})
 
+    def edit_note(self, note_id,  user_id, title, date, content, tags):
+        self.notes.replace_one({"_id": note_id},
+                               {"user_id": user_id, "title": title, "date": date, "content": content, "tags": tags})
+
+    def find_note_by_id(self, note_id):
+        return self.notes.find_one({"_id": note_id})
+
     def notes_of(self, user_id):
         return self.notes.find({"user_id": user_id})
 

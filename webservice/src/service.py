@@ -113,7 +113,8 @@ def homepage(username=None, descending=None):
 
 
 @app.route('/create_note', methods=["POST", "GET"])
-def create_note():
+@app.route('/create_note/<objectid:note_id>', methods=["POST", "GET"])
+def create_note(note_id=None):
     if current_user is None:
         return redirect(url_for("login"))
 
@@ -125,10 +126,14 @@ def create_note():
         tags = [tag.lstrip(' ').rstrip(' ')
                 for tag in str.split(request.form.get("tags"), ",")]
 
-        db.add_note(user_id, title, creation_date, content, tags)
+        if note_id is None:
+            db.add_note(user_id, title, creation_date, content, tags)
+        else:
+            db.edit_note(note_id, user_id, title, creation_date, content, tags)
+
         return redirect(url_for('homepage'))
 
-    return render_template("create_note.html", current_user=current_user)
+    return render_template("create_note.html", current_user=current_user, original_note=db.find_note_by_id(note_id) if note_id else None)
 
 
 @app.route('/delete_note/<objectid:user_id>/<objectid:note_id>/')

@@ -5,13 +5,15 @@
 <section>
     <form method="post">
         <label for="title">Title</label>
-        <input name="title" id="title" required>
+        <input name="title" id="title" required value="{% if original_note %}{{original_note['title']}}{% endif %}">
         <label for="tags">Tags (comma separated)</label>
-        <input name="tags" id="tags">
+        <input name="tags" id="tags" value="{% if original_note %}{{original_note['tags']|join(',')}}{% endif %}">
         <br />
-        <textarea name="content" id="content" placeholder="New note..." rows="50" cols="80"></textarea>
+        <textarea name="content" id="content" placeholder="New note..." rows="50"
+            cols="80">{% if original_note %}{{original_note['content']}}{% endif %}</textarea>
+
         <br />
-        <input type="submit" value="Create">
+        <input type="submit" value="Save">
     </form>
 </section>
 {% endblock %}
