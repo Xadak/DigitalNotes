@@ -96,8 +96,10 @@ def delete_other():
 @app.route('/index/')
 def homepage(username=None, descending=None):
     search_text = None
+    search_tag = None
     if request.method == 'POST':
         search_text = request.form.get('search')
+        search_tag = request.form.get('search_tag')
 
     if username is None:
         if current_user is not None:
@@ -107,7 +109,7 @@ def homepage(username=None, descending=None):
         return redirect(url_for("login"))
     return render_template("index.html", current_user=current_user, descending=descending,
                            notes=[note for note in sorted(db.notes_of(current_user["_id"]), key=lambda x: x['date'], reverse=descending is not None)
-                                  if note['title'].startswith(search_text if search_text else "")])
+                                  if note['title'].startswith(search_text if search_text else "") and (search_tag in note['tags'] if search_tag else True)])
 
 
 @app.route('/create_note', methods=["POST", "GET"])
@@ -120,7 +122,8 @@ def create_note():
         title = request.form.get("title")
         creation_date = datetime.now()
         content = request.form.get("content").lstrip(' ')
-        tags = str.split(request.form.get("tags"), ",")
+        tags = [tag.lstrip(' ').rstrip(' ')
+                for tag in str.split(request.form.get("tags"), ",")]
 
         db.add_note(user_id, title, creation_date, content, tags)
         return redirect(url_for('homepage'))
