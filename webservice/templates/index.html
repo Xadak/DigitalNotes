@@ -7,20 +7,6 @@
 </h2>
 {% if current_user %}
 <a href="{{ url_for('create_note') }}"><button type="button">Create a note</button></a>
-{% if create_note %}
-<section>
-    <form method="post">
-        <label for="title">Title</label>
-        <input name="title" id="title" required>
-        <label for="tags">Tags (comma separated)</label>
-        <input name="tags" id="tags">
-        <br />
-        <textarea name="content" id="content" placeholder="New note..." rows="50" cols="80"></textarea>
-        <br />
-        <input type="submit" value="Create">
-    </form>
-</section>
-{% else %}
 <h3>My Notes</h3>
 
 <table>
@@ -86,6 +72,5 @@
     </tbody>
     {% endfor %}
 </table>
-{% endif %}
 {% endif %}
 {% endblock %}

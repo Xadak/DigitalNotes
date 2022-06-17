@@ -128,7 +128,7 @@ def create_note():
         db.add_note(user_id, title, creation_date, content, tags)
         return redirect(url_for('homepage'))
 
-    return render_template("index.html", current_user=current_user, create_note=True)
+    return render_template("create_note.html", current_user=current_user)
 
 
 @app.route('/delete_note/<objectid:user_id>/<objectid:note_id>/')

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+
+{% block content%}
+<section>
+    <form method="post">
+        <label for="title">Title</label>
+        <input name="title" id="title" required>
+        <label for="tags">Tags (comma separated)</label>
+        <input name="tags" id="tags">
+        <br />
+        <textarea name="content" id="content" placeholder="New note..." rows="50" cols="80"></textarea>
+        <br />
+        <input type="submit" value="Create">
+    </form>
+</section>
+{% endblock %}
