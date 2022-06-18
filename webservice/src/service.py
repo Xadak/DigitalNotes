@@ -105,7 +105,7 @@ def homepage(username=None, descending=None):
         return render_template("index.html")
     if current_user is None or username != current_user["username"]:
         return redirect(url_for("login"))
-    return render_template("index.html", current_user=current_user, descending=descending,
+    return render_template("index.html", current_user=current_user, descending=descending, search_text=search_text,
                            notes=[note for note in sorted(db.notes_of(current_user["_id"]), key=lambda x: x['date'], reverse=descending is not None)
                                   if note['title'].startswith(search_text if search_text else "") or (search_text in note['tags'] if search_text else True)])
 

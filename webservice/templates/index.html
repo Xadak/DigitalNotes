@@ -33,7 +33,8 @@
         <td colspan="2">
             <form method="post">
                 <label for="search">Search:</label>
-                <input name="search" id="search" type="text" placeholder="Title or tag" />
+                <input name="search" id="search" type="text" placeholder="Title or tag"
+                    value="{{search_text if search_text else ''}}" />
                 <input type="submit" value="Search" />
             </form>
         </td>
