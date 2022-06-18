@@ -5,19 +5,18 @@
 {% endblock %}
 
 {% block content %}
-<form method="post">
+
+<form method="post" class="auth-form">
     <label for="username">Username or email</label>
     <input name="username" id="username" required>
     <label for="password">Password</label>
     <input type="password" name="password" id="password" required>
-    <input type="submit" value="Log In">
+    <input type="submit" value="Log In" class="auth-submit-button">
+
+    {% if login_failed %}
+    <div class="auth-failure">
+        Either the username or the password is incorrect.
+    </div>
+    {% endif %}
 </form>
-
-{% if login_failed %}
-
-<body>
-    Either the username or the password is incorrect.
-</body>
-{% else %}
-{% endif %}
 {% endblock %}
