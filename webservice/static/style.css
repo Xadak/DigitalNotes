@@ -22,7 +22,8 @@ nav>ul {
     align-items: center;
     list-style-type: none;
     display: grid;
-    grid-template-columns: repeat(4, fit-content(500px));
+    grid-template-rows: 1fr;
+    grid-auto-flow: column;
     grid-gap: 1em;
 }
 
