@@ -25,13 +25,9 @@
             <li><a href="{{ url_for('login') }}">Log in</a></li>
             <li><a href="{{ url_for('register', admin=False) }}">Register</a></li>
             {% endif %}
-
         </ul>
     </nav>
     <section class="content">
-        <header>
-            {% block header %}{% endblock %}
-        </header>
         {% block content %}{% endblock %}
     </section>
 </body>
