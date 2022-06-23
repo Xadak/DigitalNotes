@@ -97,10 +97,77 @@ form.auth-form>label {
     font-weight: bold;
 }
 
+.my-notes-header {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-self: end;
+    grid-column: span 4;
+}
+
+.new-note-button {
+    justify-self: end;
+    border-style: none;
+}
+
+.new-note-button>button {
+    background-color: var(--secondary-color);
+    border-radius: 0.5rem;
+    border: 0.5rem solid var(--secondary-color);
+}
+
+.note-list-header {
+    grid-column: span 4;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.note-list {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 1rem;
+    width: 100%;
+    padding: 1rem;
+}
+
+.note-list>details {
+    grid-column: span 4;
+    background-color: var(--primary-color-darker);
+    border-radius: 0.5rem;
+}
+
+.note-list>details[open] {
+    border-radius: 0.5rem;
+}
+
+.note-list>details>summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+}
+
+.note-list>details>summary {
+    border-style: solid;
+    border-radius: 0.5rem;
+    border-color: var(--primary-color-darker);
+}
+
+.note-list>details[open] summary {
+    color: var(--text-on-secondary);
+    background-color: var(--secondary-color-darker);
+    border-color: var(--secondary-color-lighter);
+}
+
+.note-list>details>summary:hover {
+    border-color: var(--secondary-color);
+}
 
 textarea {
     overflow: scroll;
     resize: none;
+    width: 100%;
+    background-color: var(--primary-color-darker);
+    color: var(--text-on-primary);
 }
 
 table {

@@ -2,19 +2,18 @@
 <!DOCTYPE html>
 
 {%block content %}
-<h2>
-    Welcome to Digital Notes!
-</h2>
 {% if current_user %}
-<a href="{{ url_for('create_note') }}"><button type="button">Create a note</button></a>
-<h3>My Notes</h3>
 
-<table>
-    <thead>
-        <td>
+<div class="note-list">
+    <div class="my-notes-header">
+        <h3>My Notes</h3>
+        <a href="{{ url_for('create_note') }}" class="new-note-button"><button type="button">Create a note</button></a>
+    </div>
+    <div class="note-list-header">
+        <label>
             Title
-        </td>
-        <td>
+        </label>
+        <label>
             Date created:
             <a
                 href="{{url_for('homepage', username=current_user['username'], descending= True if (not descending ) else None)}}">
@@ -26,56 +25,36 @@
                     {%endif%}
                 </button>
             </a>
-        </td>
-        <td>
+        </label>
+        <label>
             Tags
-        </td>
-        <td colspan="2">
-            <form method="post">
-                <label for="search">Search:</label>
-                <input name="search" id="search" type="text" placeholder="Title or tag"
-                    value="{{search_text if search_text else ''}}" />
-                <input type="submit" value="Search" />
-            </form>
-        </td>
-    </thead>
+        </label>
+        <form method="post">
+            <label for="search">Search:</label>
+            <input name="search" id="search" type="text" placeholder="Title or tag"
+                value="{{search_text if search_text else ''}}" />
+            <input type="submit" value="Search" />
+        </form>
+    </div>
     {% for note in notes %}
-    <tbody>
-        <tr>
-            <td>
-                <label>{{note["title"]}} </label>
-            </td>
-            <td>
-                <time datetime="{{note['date'].strftime('%Y-%m-%d %H:%M:%S')}}">{{note['date'].strftime('%H:%M:%S
-                    %d-%m-%Y')}}</time>
-            </td>
-            <td>
-                {{ note["tags"]|join(',') }}
-            </td>
-            <td>
+    <details>
+        <summary>
+            <label>{{note["title"]}} </label>
+            <time datetime="{{note['date'].strftime('%Y-%m-%d %H:%M:%S')}}">{{note['date'].strftime('%H:%M:%S
+                %d-%m-%Y')}}</time>
+            {{ note["tags"]|join(',') }}
+            <div>
                 <a href="{{url_for('create_note', note_id=note['_id'])}}">
                     <button type="button">Edit</button>
                 </a>
-            </td>
-            <td>
                 <a href="{{url_for('delete_note', user_id=current_user['_id'], note_id=note['_id'])}}">
                     <button type="button">Delete</button>
                 </a>
-            </td>
-
-        </tr>
-        <tr>
-            <td colspan="4">
-                <details>
-                    <summary>
-                        Note
-                    </summary>
-                    <textarea rows="30" cols="50" readonly>{{note["content"]}}</textarea>
-                </details>
-            </td>
-        </tr>
-    </tbody>
+            </div>
+        </summary>
+        <textarea rows="30" cols="50" readonly>{{note["content"]}}</textarea>
+    </details>
     {% endfor %}
-</table>
-{% endif %}
+    {% endif %}
+</div>
 {% endblock %}
