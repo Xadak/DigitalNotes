@@ -169,12 +169,3 @@ textarea {
     background-color: var(--primary-color-darker);
     color: var(--text-on-primary);
 }
-
-table {
-    border-collapse: collapse;
-}
-
-table tbody {
-    border-top: 5em solid white;
-    column-gap: 2em;
-}
