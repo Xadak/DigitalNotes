@@ -1,3 +1,5 @@
+@import url('http://fonts.cdnfonts.com/css/common-pixel');
+
 :root {
     width: 100%;
     height: 100%;
@@ -46,6 +48,14 @@ nav>ul {
     grid-template-rows: 1fr;
     grid-auto-flow: column;
     grid-gap: 1em;
+}
+
+.title-first-word {
+    font-family: 'Common Pixel', sans-serif;
+}
+
+.title-second-word {
+    font-family: 'Pinyon Script', serif;
 }
 
 body {
