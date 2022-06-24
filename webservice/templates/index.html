@@ -37,26 +37,29 @@
                 <input type="submit" value="Search" />
             </form>
         </div>
-        {% for note in notes %}
-        <details>
-            <summary>
-                <label>{{note["title"]}} </label>
-                <time datetime="{{note['date'].strftime('%Y-%m-%d %H:%M:%S')}}">{{note['date'].strftime('%H:%M:%S
-                    %d-%m-%Y')}}</time>
-                {{ note["tags"]|join(',') }}
-                <div>
-                    <a href="{{url_for('create_note', note_id=note['_id'])}}">
-                        <button type="button">Edit</button>
-                    </a>
-                    <a href="{{url_for('delete_note', user_id=current_user['_id'], note_id=note['_id'])}}">
-                        <button type="button">Delete</button>
-                    </a>
-                </div>
-            </summary>
-            <textarea rows="30" cols="50" readonly>{{note["content"]}}</textarea>
-        </details>
-        {% endfor %}
-        {% endif %}
+        <div class="note-items">
+
+            {% for note in notes %}
+            <details>
+                <summary>
+                    <label>{{note["title"]}} </label>
+                    <time datetime="{{note['date'].strftime('%Y-%m-%d %H:%M:%S')}}">{{note['date'].strftime('%H:%M:%S
+                        %d-%m-%Y')}}</time>
+                    {{ note["tags"]|join(',') }}
+                    <div>
+                        <a href="{{url_for('create_note', note_id=note['_id'])}}">
+                            <button type="button">Edit</button>
+                        </a>
+                        <a href="{{url_for('delete_note', user_id=current_user['_id'], note_id=note['_id'])}}">
+                            <button type="button">Delete</button>
+                        </a>
+                    </div>
+                </summary>
+                <textarea rows="30" cols="50" readonly>{{note["content"]}}</textarea>
+            </details>
+            {% endfor %}
+            {% endif %}
+        </div>
     </div>
 </div>
 {% endblock %}
