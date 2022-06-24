@@ -69,7 +69,7 @@ body {
     height: 100%;
     display: grid;
     justify-items: center;
-    align-items: center;
+    align-items: start;
 }
 
 .auth-form>h1 {
@@ -78,6 +78,7 @@ body {
 }
 
 .auth-form {
+    align-self: center;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 1em;
@@ -185,6 +186,7 @@ textarea {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     row-gap: 1rem;
+    padding: 1rem;
     width: 100%;
 }
 
