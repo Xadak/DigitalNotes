@@ -63,6 +63,21 @@ body {
     height: 100%;
 }
 
+input[type="text"],
+input[type="password"],
+input:not([type]) {
+    background-color: var(--primary-color-darker);
+    color: var(--text-on-primary);
+    border: none;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input:not([type]):focus {
+    outline-style: solid;
+    outline-color: var(--secondary-color-lighter);
+}
+
 .content {
     padding-top: 61px;
     width: 100%;
