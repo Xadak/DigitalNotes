@@ -4,57 +4,60 @@
 {%block content %}
 {% if current_user %}
 
-<div class="note-list">
+<div class="my-notes">
     <div class="my-notes-header">
         <h3>My Notes</h3>
-        <a href="{{ url_for('create_note') }}" class="new-note-button"><button type="button">Create a note</button></a>
+        <a href="{{ url_for('create_note') }}" class="new-note-button"><button type="button">Create a
+                note</button></a>
     </div>
-    <div class="note-list-header">
-        <label>
-            Title
-        </label>
-        <label>
-            Date created:
-            <a
-                href="{{url_for('homepage', username=current_user['username'], descending= True if (not descending ) else None)}}">
-                <button type="button">
-                    {%if descending %}
-                    Descending
-                    {%else %}
-                    Ascending
-                    {%endif%}
-                </button>
-            </a>
-        </label>
-        <label>
-            Tags
-        </label>
-        <form method="post">
-            <label for="search">Search:</label>
-            <input name="search" id="search" type="text" placeholder="Title or tag"
-                value="{{search_text if search_text else ''}}" />
-            <input type="submit" value="Search" />
-        </form>
+    <div class="note-list">
+        <div class="note-list-header">
+            <label>
+                Title
+            </label>
+            <label>
+                Date created:
+                <a
+                    href="{{url_for('homepage', username=current_user['username'], descending= True if (not descending ) else None)}}">
+                    <button type="button">
+                        {%if descending %}
+                        Descending
+                        {%else %}
+                        Ascending
+                        {%endif%}
+                    </button>
+                </a>
+            </label>
+            <label>
+                Tags
+            </label>
+            <form method="post">
+                <label for="search">Search:</label>
+                <input name="search" id="search" type="text" placeholder="Title or tag"
+                    value="{{search_text if search_text else ''}}" />
+                <input type="submit" value="Search" />
+            </form>
+        </div>
+        {% for note in notes %}
+        <details>
+            <summary>
+                <label>{{note["title"]}} </label>
+                <time datetime="{{note['date'].strftime('%Y-%m-%d %H:%M:%S')}}">{{note['date'].strftime('%H:%M:%S
+                    %d-%m-%Y')}}</time>
+                {{ note["tags"]|join(',') }}
+                <div>
+                    <a href="{{url_for('create_note', note_id=note['_id'])}}">
+                        <button type="button">Edit</button>
+                    </a>
+                    <a href="{{url_for('delete_note', user_id=current_user['_id'], note_id=note['_id'])}}">
+                        <button type="button">Delete</button>
+                    </a>
+                </div>
+            </summary>
+            <textarea rows="30" cols="50" readonly>{{note["content"]}}</textarea>
+        </details>
+        {% endfor %}
+        {% endif %}
     </div>
-    {% for note in notes %}
-    <details>
-        <summary>
-            <label>{{note["title"]}} </label>
-            <time datetime="{{note['date'].strftime('%Y-%m-%d %H:%M:%S')}}">{{note['date'].strftime('%H:%M:%S
-                %d-%m-%Y')}}</time>
-            {{ note["tags"]|join(',') }}
-            <div>
-                <a href="{{url_for('create_note', note_id=note['_id'])}}">
-                    <button type="button">Edit</button>
-                </a>
-                <a href="{{url_for('delete_note', user_id=current_user['_id'], note_id=note['_id'])}}">
-                    <button type="button">Delete</button>
-                </a>
-            </div>
-        </summary>
-        <textarea rows="30" cols="50" readonly>{{note["content"]}}</textarea>
-    </details>
-    {% endfor %}
-    {% endif %}
 </div>
 {% endblock %}

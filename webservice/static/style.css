@@ -109,11 +109,18 @@ form.auth-form>label {
     font-weight: bold;
 }
 
+.my-notes {
+    display: grid;
+    grid-auto-flow: row;
+    padding: 1rem;
+    row-gap: 1rem;
+    width: 100%;
+}
+
 .my-notes-header {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-self: end;
-    grid-column: span 4;
 }
 
 .new-note-button {
@@ -137,9 +144,6 @@ form.auth-form>label {
     display: grid;
     grid-auto-flow: row;
     grid-template-columns: repeat(4, 1fr);
-    row-gap: 1rem;
-    width: 100%;
-    padding: 1rem;
 }
 
 .note-list>details {
@@ -156,6 +160,7 @@ form.auth-form>label {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     align-items: center;
+    padding: 0.5rem;
 }
 
 .note-list>details>summary {
