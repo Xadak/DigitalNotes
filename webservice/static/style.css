@@ -171,11 +171,6 @@ form.auth-form>label {
 .note-items>details {
     grid-column: span 4;
     background-color: var(--primary-color-darker);
-    border-radius: 0.5rem;
-}
-
-.note-items>details[open] {
-    border-radius: 0.5rem;
 }
 
 .note-items>details>summary {
@@ -187,7 +182,6 @@ form.auth-form>label {
 
 .note-items>details>summary {
     border-style: solid;
-    border-radius: 0.5rem;
     border-color: var(--primary-color-darker);
 }
 
