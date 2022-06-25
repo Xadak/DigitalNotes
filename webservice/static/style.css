@@ -204,6 +204,9 @@ textarea {
     width: 100%;
     background-color: var(--primary-color-darker);
     color: var(--text-on-primary);
+    border: solid var(--primary-color-darker);
+    padding: 0.2rem;
+    outline: none;
 }
 
 .create-note-form {
