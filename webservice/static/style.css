@@ -66,6 +66,7 @@ body {
 input[type="text"],
 input[type="password"],
 input:not([type]) {
+    padding: 0.2rem;
     background-color: var(--primary-color-darker);
     color: var(--text-on-primary);
     border: none;
