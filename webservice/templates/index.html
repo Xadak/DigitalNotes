@@ -15,16 +15,14 @@
                 Title
             </label>
             <label>
-                Date created:
-                <a
-                    href="{{url_for('homepage', username=current_user['username'], descending= True if (not descending ) else None)}}">
-                    <button type="button">
-                        {%if descending %}
-                        Descending
-                        {%else %}
-                        Ascending
-                        {%endif%}
-                    </button>
+                Last modified
+                <a href="{{url_for('homepage', username=current_user['username'], descending= True if (not descending ) else None)}}"
+                    style="text-decoration: none; color:var(--text-on-primary);">
+                    {%if descending %}
+                    &uarr;
+                    {%else %}
+                    &darr;
+                    {%endif%}
                 </a>
             </label>
             <label>
