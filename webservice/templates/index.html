@@ -30,8 +30,9 @@
             </label>
             <form method="post">
                 <input name="search" id="search" type="text" placeholder="Search (title or tag)"
-                    value="{{search_text if search_text else ''}}" />
-                <input type="submit" value="Search" />
+                    value="{{search_text if search_text else ''}}" /><button type="submit" class="search-button">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
             </form>
         </div>
         <div class="note-items">

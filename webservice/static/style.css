@@ -158,6 +158,17 @@ form.auth-form>label {
     padding: 0.5rem;
 }
 
+.search-button {
+    border: var(--primary-color-darker), solid;
+    background-color: var(--primary-color-darker);
+    padding: 0.2rem;
+    color: var(--text-on-primary);
+}
+
+.search-button:hover {
+    color: var(--secondary-color);
+}
+
 .note-list {
     display: grid;
     grid-auto-flow: row;
