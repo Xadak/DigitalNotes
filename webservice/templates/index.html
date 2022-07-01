@@ -30,7 +30,8 @@
             </label>
             <form method="post">
                 <input name="search" id="search" type="text" placeholder="Search (title or tag)"
-                    value="{{search_text if search_text else ''}}" /><button type="submit" class="search-button">
+                    value="{{search_text if search_text else ''}}" /><button type="submit"
+                    class="search-button icon-button">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
             </form>
@@ -44,12 +45,12 @@
                     <time datetime="{{note['date'].strftime('%Y-%m-%d %H:%M:%S')}}">{{note['date'].strftime('%H:%M:%S
                         %d-%m-%Y')}}</time>
                     {{ note["tags"]|join(',') }}
-                    <div>
-                        <a href="{{url_for('create_note', note_id=note['_id'])}}">
-                            <button type="button">Edit</button>
-                        </a>
-                        <a href="{{url_for('delete_note', user_id=current_user['_id'], note_id=note['_id'])}}">
-                            <button type="button">Delete</button>
+                    <div class="edit-buttons">
+                        <a href="{{url_for('create_note', note_id=note['_id'])}}"><button type="button"
+                                class="icon-button"><i class="fa-solid fa-pen-to-square"></i></button></a><a
+                            href="{{url_for('delete_note', user_id=current_user['_id'], note_id=note['_id'])}}"><button
+                                type="button" class="delete-button icon-button"><i
+                                    class="fa-solid fa-trash-can"></i></button>
                         </a>
                     </div>
                 </summary>
