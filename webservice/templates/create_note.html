@@ -4,19 +4,16 @@
 {% block content%}
 <section class="create-note-form">
     <form method="post">
-        <div>
-            <input name="title" id="title" required value="{% if original_note %}{{original_note['title']}}{% endif %}"
-                placeholder="Title">
-        </div>
-        <div>
-            <input name="tags" id="tags" value="{% if original_note %}{{original_note['tags']|join(',')}}{% endif %}"
-                placeholder="Tags (comma separated)">
-        </div>
+        <input name="title" id="title" required value="{% if original_note %}{{original_note['title']}}{% endif %}"
+            placeholder="Title">
+        <input name="tags" id="tags" value="{% if original_note %}{{original_note['tags']|join(',')}}{% endif %}"
+            placeholder="Tags (comma separated)">
         <textarea name="content" id="content" placeholder="New note..." rows="50"
             cols="80">{% if original_note %}{{original_note['content']}}{% endif %}</textarea>
         <div class="create-note-buttons">
-            <input type="submit" value="Save">
-            <a href="{{url_for('homepage')}}"><button type="button" style="width:100%;">Cancel</button></a>
+            <input type="submit" value="Save" class="save-note-button">
+            <a href="{{url_for('homepage')}}"><button type="button" class="cancel-note-button"
+                    style="width:100%;">Cancel</button></a>
         </div>
     </form>
 </section>
