@@ -1,17 +1,19 @@
 <!doctype html>
 <html>
-<title>{% block title %}{% endblock %} - Digital Notes</title>
+<title>{% block title %}{% endblock %} Digital Notes</title>
 
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link href="http://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pinyon Script">
+    <link rel="icon" type="image/x-icon" href="/static/res/favicon.ico">
     <script src="https://kit.fontawesome.com/923f30e2b1.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <nav>
-        <h1><span class="title-first-word">Digital</span> <span class="title-second-word">Notes</span></h1>
+        <h1><i class="fa-solid fa-note-sticky" style="color: var(--secondary-color);"></i> <span
+                class="title-first-word">Digital</span> <span class="title-second-word">Notes</span></h1>
         <ul>
             {% if current_user %}
             <li><span>{{current_user["username"]}}{% if current_user["admin"] is true %}(Administrator){% endif
