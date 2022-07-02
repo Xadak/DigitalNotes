@@ -245,6 +245,19 @@ form.auth-form>label {
     border-color: var(--secondary-color-lighter);
 }
 
+.note-items>details[open] .edit-buttons * {
+    background-color: var(--secondary-color-darker);
+    color: var(--text-on-secondary);
+}
+
+.note-items>details[open] .edit-buttons *:hover {
+    color: var(--secondary-color);
+}
+
+.note-items>details[open] .edit-buttons .delete-button:hover * {
+    color: red;
+}
+
 .note-items>details>summary:hover {
     border-color: var(--secondary-color);
 }
