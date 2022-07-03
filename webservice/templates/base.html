@@ -1,32 +1,41 @@
 <!doctype html>
-<title>{% block title %}{% endblock %} - Digital Notes</title>
+<html>
+<title>{% block title %}{% endblock %} Digital Notes</title>
 
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="http://fonts.cdnfonts.com/css/common-pixel" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pinyon Script">
+    <link rel="icon" type="image/x-icon" href="/static/res/favicon.ico">
+    <script src="https://kit.fontawesome.com/923f30e2b1.js" crossorigin="anonymous"></script>
 </head>
-<nav>
-    <h1>Digital Notes</h1>
-    <ul>
-        {% if current_user %}
-        <li><span>{{current_user["username"]}}{% if current_user["admin"] is true %}(Administrator){% endif %}</span>
-        </li>
-        <li><a href="{{ url_for('logout') }}">Log Out</a></li>
-        {% if current_user["admin"] is true %}
-        <li><a href="{{url_for('register', admin=True)}}">Register new administrator</a></li>
-        <li><a href="{{url_for('delete_other')}}">Delete a user</a></li>
-        {% else %}
-        <li><a href="{{url_for('delete_self')}}">Delete account</a></li>
-        {% endif %}
-        {%else %}
-        <li><a href="{{ url_for('login') }}">Log in</a></li>
-        <li><a href="{{ url_for('register', admin=False) }}">Register</a></li>
-        {% endif %}
 
-    </ul>
-</nav>
-<section class="content">
-    <header>
-        {% block header %}{% endblock %}
-    </header>
-    {% block content %}{% endblock %}
-</section>
+<body>
+    <nav>
+        <h1><a href="{{url_for('homepage')}}"><i class="fa-solid fa-note-sticky"
+                    style="color: var(--secondary-color);"></i> <span class="title-first-word">Digital</span> <span
+                    class="title-second-word">Notes</span></a></h1>
+        <ul>
+            {% if current_user %}
+            <li><span>{{current_user["username"]}}{% if current_user["admin"] is true %}(Administrator){% endif
+                    %}</span>
+            </li>
+            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+            {% if current_user["admin"] is true %}
+            <li><a href="{{url_for('register', admin=True)}}">Register new administrator</a></li>
+            <li><a href="{{url_for('delete_other')}}">Delete a user</a></li>
+            {% else %}
+            <li><a href="{{url_for('delete_self')}}" class="delete-account-link">Delete account</a></li>
+            {% endif %}
+            {%else %}
+            <li><a href="{{ url_for('login') }}">Log in</a></li>
+            <li><a href="{{ url_for('register', admin=False) }}">Register</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <section class="content">
+        {% block content %}{% endblock %}
+    </section>
+</body>
+
+</html>
