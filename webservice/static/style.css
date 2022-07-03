@@ -76,6 +76,10 @@ nav>ul a:hover {
     font-family: 'Pinyon Script', serif;
 }
 
+.delete-account-link {
+    color: red;
+}
+
 body {
     width: 100%;
     height: 100%;
