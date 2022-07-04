@@ -6,7 +6,7 @@
 
 {% block content %}
 <form method="post" class="auth-form">
-    <h1>Register</h1>
+    <h1>Register{%if admin%} new administrator{%endif%}</h1>
     <label for="username">Username</label>
     <input name="username" id="username" required>
     <label for="email">Email</label>
