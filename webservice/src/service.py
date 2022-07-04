@@ -85,10 +85,10 @@ def delete_other():
 
         if username != current_user["username"]:
             if db.delete_user(username) is None:
-                return render_template("delete_user.html", not_found=True, username=current_user["username"])
+                return render_template("delete_user.html", not_found=True, current_user=current_user)
             return redirect(url_for("homepage"))
-        return render_template("delete_user.html", selected_self=True, username=current_user["username"])
-    return render_template("delete_user.html", username=current_user["username"])
+        return render_template("delete_user.html", selected_self=True, current_user=current_user)
+    return render_template("delete_user.html", current_user=current_user)
 
 
 @app.route('/index/<username>/', methods=["POST", "GET"])
