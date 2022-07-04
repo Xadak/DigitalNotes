@@ -45,7 +45,7 @@ def register(admin):
         password = request.form.get("password")
 
         if db.find_user(username, password) is not None or db.find_user(email, password) is not None:
-            return render_template("register.html", user_exists=True)
+            return render_template("register.html", user_exists=True, current_user=current_user)
 
         new_user = {"admin": admin_bool, "username": username, "email": email,
                     "first_name": first_name, "last_name": last_name, "password": password}
@@ -55,7 +55,7 @@ def register(admin):
             current_user = new_user
         return redirect(url_for("homepage", username=current_user['username']))
     else:
-        return render_template("register.html", admin=admin_bool)
+        return render_template("register.html", admin=admin_bool, current_user=current_user)
 
 
 @app.route('/auth/logout/')
@@ -85,10 +85,10 @@ def delete_other():
 
         if username != current_user["username"]:
             if db.delete_user(username) is None:
-                return render_template("delete_user.html", not_found=True, username=current_user["username"])
+                return render_template("delete_user.html", not_found=True, current_user=current_user)
             return redirect(url_for("homepage"))
-        return render_template("delete_user.html", selected_self=True, username=current_user["username"])
-    return render_template("delete_user.html", username=current_user["username"])
+        return render_template("delete_user.html", selected_self=True, current_user=current_user)
+    return render_template("delete_user.html", current_user=current_user)
 
 
 @app.route('/index/<username>/', methods=["POST", "GET"])
