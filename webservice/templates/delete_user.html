@@ -5,10 +5,11 @@
 {% endblock %}
 
 {% block content %}
-<form method="post">
+<form method="post" class="auth-form">
+    <h1>Delete User</h1>
     <label for="username">Username or email</label>
     <input name="username" id="username" required>
-    <input type="submit" value="Delete">
+    <input type="submit" value="Delete" class="auth-submit-button">
 </form>
 
 {% if not_found %}
