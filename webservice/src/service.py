@@ -45,7 +45,7 @@ def register(admin):
         password = request.form.get("password")
 
         if db.find_user(username, password) is not None or db.find_user(email, password) is not None:
-            return render_template("register.html", user_exists=True)
+            return render_template("register.html", user_exists=True, current_user=current_user)
 
         new_user = {"admin": admin_bool, "username": username, "email": email,
                     "first_name": first_name, "last_name": last_name, "password": password}
@@ -55,7 +55,7 @@ def register(admin):
             current_user = new_user
         return redirect(url_for("homepage", username=current_user['username']))
     else:
-        return render_template("register.html", admin=admin_bool)
+        return render_template("register.html", admin=admin_bool, current_user=current_user)
 
 
 @app.route('/auth/logout/')
