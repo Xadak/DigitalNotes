@@ -9,11 +9,13 @@ My submission for the 2022 Information systems semester project
 1. Install [docker](https://www.docker.com/).
 2. (Linux) Install docker-compose.
 3. Clone [this repository](https://github.com/Xadak/Information-Systems-Semester-Project.git).
-4. Open up a terminal of your choice and cd to the directory where you cloned the repository.
-5. Execute the following commands in your terminal to start the server:
-'sudo docker build -t webservice ./webservice'  
-'sudo docker-compose up --build'
+4. Open up a terminal of your choice and cd to the directory where you cloned the repository.  
+5. Execute the following commands in your terminal to start the server:  
+`docker build -t webservice ./webservice`  
+`docker-compose up --build`
 6. Connect to the server on port 5000 (eg. localhost:5000 on the host machine)
+7. To shut down the server run the following command:  
+`docker-compose down`
 
 ## Usage
 
@@ -32,7 +34,7 @@ You have to choose a title for your note, and optionally some comma separated ta
 
 You can delete your account at any time by clicking on **delete account**. __Warning!__ : when you delete your account, all your notes are lost!
 
-### Administrator functions
+## Administrator functions
 
 An administrator account has extra capabilities. You have to be an administrator to register a new administrator account. In webservice/data/initial_admins.json you can add/change the initial administrator accounts when the server starts. You need to restart the server for the changes to take effect.
 
