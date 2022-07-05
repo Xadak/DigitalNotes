@@ -15,7 +15,10 @@ class DBHandle:
         return self.users.find_one({"$or": [{"username": username_or_email}, {"email": username_or_email}], "password": password})
 
     def delete_user(self, username_or_email):
-        return self.users.find_one_and_delete({"username": username_or_email})
+        deleted_user = self.users.find_one_and_delete(
+            {"username": username_or_email})
+        self.notes.delete_many({"user_id": deleted_user["_id"]})
+        return deleted_user
 
     def add_note(self, user_id, title, date, content, tags):
         self.notes.insert_one(
