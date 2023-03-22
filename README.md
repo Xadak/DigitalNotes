@@ -2,7 +2,7 @@
 
 ## Introduction
 
-My submission for the 2022 Information systems semester project
+My submission for the 2022 Information systems summer semester project
 
 ## Installation
 
